@@ -29,8 +29,8 @@ async function run() {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
     // database connection
-    const coffeeCollection = client.db('tourismDB').collection('tourism');
-    const userCollection =client.db('coffeeDB').collection('tourist');
+    const spotCollection = client.db('tourismDB').collection('tourism');
+    // const userCollection =client.db('coffeeDB').collection('tourist');
     
 // // read operation 
 //     app.get('/coffee', async(req,res)=>{
@@ -47,14 +47,14 @@ async function run() {
 //         const result = await coffeeCollection.findOne(query);
 //         res.send(result);
 //     })
-//     // data insert or create operation 
-//     app.post('/coffee', async(req,res)=>{
-//         const newCoffee = req.body;
-//         console.log(newCoffee);
-//         const result= await coffeeCollection.insertOne(newCoffee);
-//         res.send(result);
+    // data insert or create operation 
+    app.post('/addSpot', async(req,res)=>{
+      const newSpot = req.body;
+      console.log(newSpot);
+      const result= await spotCollection.insertOne(newSpot);
+      res.send(result);
 
-//     })
+  })
 
 //     // upadted or put operation
 //     app.put('/coffee/:id', async(req, res) =>{
@@ -139,7 +139,7 @@ run().catch(console.dir);
 
 
 app.get('/',(req,res)=>{
-    res.send('Coffee making server is running....')
+    res.send('Tourist Spot create making server is running....')
 })
 
 app.listen(port,()=>{
