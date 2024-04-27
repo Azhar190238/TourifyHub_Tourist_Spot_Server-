@@ -27,26 +27,26 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
     // database connection
     const spotCollection = client.db('tourismDB').collection('tourism');
     // const userCollection =client.db('coffeeDB').collection('tourist');
     
-// // read operation 
-//     app.get('/coffee', async(req,res)=>{
-//         const cursor= coffeeCollection.find();
-//         const result= await cursor.toArray();
-//         res.send(result);
-//     })
+// read operation 
+    app.get('/addSpot', async(req,res)=>{
+        const cursor= spotCollection.find();
+        const result= await cursor.toArray();
+        res.send(result);
+    })
 
-//     //specific data read
+    //specific data read
 
-//     app.get('/coffee/:id', async(req, res) =>{
-//         const id= req.params.id;
-//         const query= { _id: new ObjectId(id)}
-//         const result = await coffeeCollection.findOne(query);
-//         res.send(result);
-//     })
+    app.get('/addSpot/:id', async(req, res) =>{
+        const id= req.params.id;
+        const query= { _id: new ObjectId(id)}
+        const result = await spotCollection.findOne(query);
+        res.send(result);
+    })
     // data insert or create operation 
     app.post('/addSpot', async(req,res)=>{
       const newSpot = req.body;
@@ -143,5 +143,5 @@ app.get('/',(req,res)=>{
 })
 
 app.listen(port,()=>{
-    console.log(`Coffee server is running on port : ${port}`)
+    console.log(`Tourist server is running on port : ${port}`)
 })
