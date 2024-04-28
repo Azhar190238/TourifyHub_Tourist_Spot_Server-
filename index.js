@@ -26,7 +26,7 @@ const client = new MongoClient(uri, {
 
 async function run() {
   try {
-    // Connect the client to the server	(optional starting in v4.7)
+    
     // await client.connect();
     // database connection
     const spotCollection = client.db('tourismDB').collection('tourism');
@@ -56,26 +56,26 @@ async function run() {
 
   })
 
-//     // upadted or put operation
-//     app.put('/coffee/:id', async(req, res) =>{
-//         const id= req.params.id;
-//         const filter= { _id: new ObjectId(id)}
-//         const options= {upsert:true};
-//         const updatedCoffee = req.body;
-//         const coffee ={
-//             $set:{
-//                 name: updatedCoffee.name,
-//                 chef: updatedCoffee.chef,
-//                 supplier: updatedCoffee.supplier,
-//                 taste: updatedCoffee.taste,
-//                 category: updatedCoffee.category,
-//                 details: updatedCoffee.details,
-//                 photo: updatedCoffee.photo
-//             }
-//         }
-//         const result = await coffeeCollection.updateOne(filter,coffee,options);
-//         res.send(result);
-//     })
+    // upadted or put operation
+    app.put('/addSpot/:id', async(req, res) =>{
+        const id= req.params.id;
+        const filter= { _id: new ObjectId(id)}
+        const options= {upsert:true};
+        const updatedSpot = req.body;
+        const tourist ={
+            $set:{
+                name: updatedSpot.name,
+                chef: updatedSpot.chef,
+                supplier: updatedSpot.supplier,
+                taste: updatedSpot.taste,
+                category: updatedSpot.category,
+                details: updatedSpot.details,
+                photo: updatedSpot.photo
+            }
+        }
+        const result = await spotCollection.updateOne(filter,tourist,options);
+        res.send(result);
+    })
 
 //          // data remove or delete operation
 //          app.delete('/coffee/:id', async(req, res) =>{
