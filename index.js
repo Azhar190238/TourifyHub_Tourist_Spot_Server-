@@ -30,7 +30,7 @@ async function run() {
     // await client.connect();
     // database connection
     const spotCollection = client.db('tourismDB').collection('tourism');
-    // const userCollection =client.db('coffeeDB').collection('tourist');
+    const countryCollection =client.db('tourismDB').collection('countries');
     
 // read operation 
     app.get('/addSpot', async(req,res)=>{
@@ -39,12 +39,22 @@ async function run() {
         res.send(result);
     })
 
+
+
     //specific data read
 
     app.get('/addSpot/:id', async(req, res) =>{
         const id= req.params.id;
         const query= { _id: new ObjectId(id)}
         const result = await spotCollection.findOne(query);
+        res.send(result);
+    })
+
+      //specific data read send to email
+
+      app.get('/myList/:id', async(req, res) =>{
+        const id= req.params.id;
+        const result = await spotCollection.find({email:id}).toArray();
         res.send(result);
     })
     // data insert or create operation 
@@ -80,23 +90,18 @@ async function run() {
         res.send(result);
     })
 
-//          // data remove or delete operation
-//          app.delete('/coffee/:id', async(req, res) =>{
-//             const id= req.params.id;
-//             const query= { _id: new ObjectId(id)}
-//             const result = await coffeeCollection.deleteOne(query);
-//             res.send(result);
-//         })
+         // data remove or delete operation
+         app.delete('/addSpot/:id', async(req, res) =>{
+            const id= req.params.id;
+            const query= { _id: new ObjectId(id)}
+            const result = await spotCollection.deleteOne(query);
+            res.send(result);
+        })
 
 
 //         // User related APIs
 
-//         // read operation 
-//     app.get('/user', async(req,res)=>{
-//         const cursor= userCollection.find();
-//         const result= await cursor.toArray();
-//         res.send(result);
-//     })
+
 
 
 //  // data insert or create operation 
