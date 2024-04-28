@@ -101,7 +101,12 @@ async function run() {
 
 //         // User related APIs
 
-
+    // read operation for countries 
+    app.get('/countries', async(req,res)=>{
+      const country= countryCollection.find();
+      const result= await country.toArray();
+      res.send(result);
+  })
 
 
 //  // data insert or create operation 
