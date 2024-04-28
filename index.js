@@ -64,13 +64,16 @@ async function run() {
         const updatedSpot = req.body;
         const tourist ={
             $set:{
-                name: updatedSpot.name,
-                chef: updatedSpot.chef,
-                supplier: updatedSpot.supplier,
-                taste: updatedSpot.taste,
-                category: updatedSpot.category,
-                details: updatedSpot.details,
+              country_name: updatedSpot.country_name,
+              spot_name: updatedSpot.spot_name,
+                description: updatedSpot.description,
+                seasonality: updatedSpot.seasonality,
+                cost: updatedSpot.cost,
+                time: updatedSpot.time,
+                visitors_per_year: updatedSpot.visitors_per_year,
+                location: updatedSpot.location,
                 photo: updatedSpot.photo
+               
             }
         }
         const result = await spotCollection.updateOne(filter,tourist,options);
