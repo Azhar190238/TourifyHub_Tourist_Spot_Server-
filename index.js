@@ -99,8 +99,6 @@ async function run() {
         })
 
 
-//         // User related APIs
-
     // read operation for countries 
     app.get('/countries', async(req,res)=>{
       const country= countryCollection.find();
@@ -108,43 +106,22 @@ async function run() {
       res.send(result);
   })
 
+  // read operation for same countries 
 
-//  // data insert or create operation 
-//  app.post('/user', async(req,res)=>{
-//     const user = req.body;
-//     console.log(user);
-//     const result= await userCollection.insertOne(user);
-//     res.send(result);
+  app.get('/countries/:country_name', async (req, res) => {
+    const countryName = req.params.country_name;
+    const query = { country_name: countryName }; // Query by country_name directly
+    const result = await countryCollection.findOne(query);
+    res.send(result);
+});
 
-// })
 
-//  // upadted or put operation
-//  app.patch('/user', async(req, res) =>{
-//     const user = req.body;
-//     const filter={email: user.email} 
-//     const updatedDoc ={
-//         $set:{
-//             lastLoggedAt: user.lastLoggedAt  
-//         }
-//     }
-//     const result = await userCollection.updateOne(filter,updatedDoc);
-//     res.send(result);
-// })
-
-// // delete operation 
- 
-// app.delete('/user/:id', async(req, res) =>{
-//     const id= req.params.id;
-//     const query= { _id: new ObjectId(id)}
-//     const result = await userCollection.deleteOne(query);
-//     res.send(result);
-// })
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
-    // Ensures that the client will close when you finish/error
+    
     // await client.close();
   }
 }
